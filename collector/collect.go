@@ -14,3 +14,12 @@ func (c *Collector) run() {
 		}
 	}
 }
+
+func (c *Collector) logAlert(alert *Alert) {
+	b, err := json.Marshal(alert)
+	if err != nil {
+		c.log.Errorf("failed to marshal alert: %v", err)
+		return
+	}
+	c.log.Infof("alert fired: %s", string(b))
+}
